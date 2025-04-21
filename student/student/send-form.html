@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Notification</title>
+</head>
+<body>
+    <h2>Send Notification</h2>
+    <form action="send-notification.php" method="POST">
+        <label>Sender Email:</label>
+        <input type="email" name="sender_email" required><br><br>
+
+        <label>Receiver Email:</label>
+        <input type="email" name="receiver_email" required><br><br>
+
+        <label>Message:</label>
+        <textarea name="message" required></textarea><br><br>
+
+        <input type="submit" value="Send Notification">
+    </form>
+</body>
+</html>
