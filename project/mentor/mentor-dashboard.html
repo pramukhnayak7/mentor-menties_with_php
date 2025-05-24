@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mentor Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+/* General Styles */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f8f9fa;
+}
+
+/* Header Section */
+.header {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background-color: #007bff;
+padding: 20px 40px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+z-index: 10;
+}
+
+.header .pagetitle {
+color: #fff;
+font-size: 24px;
+font-weight: bold;
+display: flex;
+align-items: center; /* Align the text and checkmark */
+}
+
+.check-icon {
+width: 20px; /* Adjust the size of the checkmark icon */
+height: 20px;
+margin-left: 5px; /* Tight spacing between the text and the icon */
+}
+
+/* Desktop navigation styles */
+.navbar a {
+color: #fff;
+margin: 0 15px;
+font-size: 18px;
+display: inline-block; /* Ensure the links are inline in desktop view */
+}
+
+/* Mobile navigation styles */
+.navbar {
+display: none; /* Hidden by default on mobile */
+transition: all 0.3s ease-in-out;
+}
+
+.navbar.active {
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 70px;
+right: 20px;
+background: rgba(0, 123, 255, 0.8); /* Semi-transparent background */
+padding: 10px 20px;
+border-radius: 8px;
+backdrop-filter: blur(8px); /* Apply the blur effect */
+}
+
+#menu-icon {
+display: block;
+font-size: 2rem;
+cursor: pointer;
+}
+
+/* Show navbar on mobile when active */
+.navbar.active a {
+padding: 10px 0;
+color: #fff;
+text-decoration: none;
+font-size: 16px;
+}
+
+/* Desktop-specific styles */
+@media screen and (min-width: 768px) {
+.navbar {
+  display: flex !important;
+  flex-direction: row;
+}
+
+.navbar a {
+  color: #fff;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+#menu-icon {
+  display: none;
+}
+}
+
+
+/* Responsive Styling for Mobile Menu */
+#menu-icon {
+font-size: 30px;
+color: white;
+display: none; /* Hide menu icon by default */
+}
+
+@media screen and (max-width: 768px) {
+.navbar {
+    display: none; /* Hide the navbar on small screens */
+}
+
+#menu-icon {
+    display: block; /* Show the menu icon on small screens */
+}
+}
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+
+    .heading {
+      text-align: center;
+      margin: 2rem 0;
+      color: #343a40;
+    }
+
+    .student-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .student-info {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .student-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      max-width: 230px;
+      text-align: center;
+      margin: 10px;
+    }
+
+    h4 {
+      margin-top: 3rem;
+      color: #0d6efd;
+    }
+
+    /* Change the carousel control arrow color to blue */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: blue;
+      border-radius: 50%;
+    }
+
+
+    .carousel-control-prev-icon::after,
+    .carousel-control-next-icon::after {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      border: solid blue;
+      border-width: 0 3px 3px 0;
+      padding: 3px;
+    }
+
+    .carousel-control-prev-icon::after {
+      transform: rotate(135deg);
+    }
+
+    .carousel-control-next-icon::after {
+      transform: rotate(-45deg);
+    }
+
+    /* Custom Dropdown Color */
+    .form-select {
+      background-color: #ccd0d4;
+      color: white;
+      border: 1px solid #007bff;
+      border-radius: 0.25rem;
+    }
+
+    .form-select:focus {
+      background-color: #0056b3;
+      color: white;
+      border-color: #0056b3;
+    }
+
+    .form-select option {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+      <!-- HEADER SECTION -->
+      <header class="header">
+        <span class="pagetitle">
+            MENTOR DASHBOARD
+        </span>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar" id="navbar">
+            <a href="mentor.html">About Mentor</a>
+            <a href="mentor-dashboard.html">Dashboard</a>
+            <a href="mentor-profile.html">Profile</a>
+        </nav>
+    </header>    
+    
+    
+
+  <main class="container">
+    <h2 class="heading">Student List</h2>
+
+    <div class="mb-4">
+      <label for="yearSelect" class="form-label">Select Year</label>
+      <select class="form-select" id="yearSelect"></select>
+    </div>
+
+    <div id="carouselContainer"></div>
+  </main>
+
+  <script>
+    const studentsByYear = {
+      2024: [
+        { name: "PRAMUKH A NAYAK", usn: "NNM24IS158", email: "nnm24is158@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS158.JPG" },
+        { name: "PRANAV R", usn: "NNM24IS159", email: "nnm24is159@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS159.JPG" },
+        { name: "PRANAV SHENOY", usn: "NNM24IS160", email: "nnm24is160@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS160.JPG" },
+        { name: "PRARTHANA ACHARYA", usn: "NNM24IS161", email: "nnm24is161@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS161.JPG" },
+        { name: "PRARTHANA NAYAK", usn: "NNM24IS162", email: "annm24is162@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS162.JPG" },
+        { name: "PRATHAM", usn: "NNM24IS163", email: "nnm24is163@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS164.JPG" },
+        { name: "PRATHAM", usn: "NNM24IS164", email: "nnm24is164@nmamit.in", img: "https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS163.JPG" }
+      ],
+      2025: [
+        { name: "Aanya Rao", usn: "NNM25IS101", email: "aanya@example.com", img: "https://randomuser.me/api/portraits/women/44.jpg" },
+        { name: "Rohan Mehra", usn: "NNM25IS102", email: "rohan@example.com", img: "https://randomuser.me/api/portraits/men/35.jpg" }
+      ],
+      2026: [
+        { name: "Sneha Kulkarni", usn: "NNM26IS201", email: "sneha@example.com", img: "https://randomuser.me/api/portraits/women/65.jpg" },
+        { name: "Kunal Desai", usn: "NNM26IS202", email: "kunal@example.com", img: "https://randomuser.me/api/portraits/men/41.jpg" }
+      ],
+      2027: [
+        { name: "Meena Sharma", usn: "NNM27IS301", email: "meena@example.com", img: "https://randomuser.me/api/portraits/women/30.jpg" },
+        { name: "Nikhil Jain", usn: "NNM27IS302", email: "nikhil@example.com", img: "https://randomuser.me/api/portraits/men/32.jpg" }
+      ],
+      2028: [
+        { name: "Aarti Kulkarni", usn: "NNM28IS401", email: "aarti@example.com", img: "https://randomuser.me/api/portraits/women/24.jpg" },
+        { name: "Harsh Solanki", usn: "NNM28IS402", email: "harsh@example.com", img: "https://randomuser.me/api/portraits/men/29.jpg" }
+      ]
+    };
+
+    const yearSelect = document.getElementById("yearSelect");
+    const carouselContainer = document.getElementById("carouselContainer");
+
+    function renderCarousel(year) {
+      const students = studentsByYear[year];
+      const carouselId = `carousel-${year}`;
+      
+      let slides = '';
+      
+      // For each student, create a slide with only one student per slide
+      students.forEach((student, index) => {
+        slides += `
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
+            <div class="d-flex justify-content-center">
+              <div class="student-card">
+                <img src="${student.img}" class="student-img" alt="${student.name}">
+                <div class="student-info">
+                  <strong>Name:</strong> ${student.name}<br>
+                  <strong>USN:</strong> ${student.usn}<br>
+                  <strong>Email:</strong> ${student.email}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      carouselContainer.innerHTML = ` 
+        <h4>${year}</h4>
+        <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            ${slides}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      `;
+    }
+
+    // Populate dropdown
+    Object.keys(studentsByYear).forEach((year, idx) => {
+      const option = document.createElement("option");
+      option.value = year;
+      option.text = year;
+      if (idx === 0) option.selected = true;
+      yearSelect.appendChild(option);
+    });
+
+    // Initial render
+    renderCarousel(yearSelect.value);
+
+    // Listen for changes
+    yearSelect.addEventListener("change", () => {
+      renderCarousel(yearSelect.value);
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="common/login/login.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="toggle-tabs">
+      <button id="showStudent" class="tab-btn active">Student</button>
+      <button id="showMentor" class="tab-btn">Mentor</button>
+    </div>
+
+    <div id="studentForm" class="form-section active">
+      <h2>Student Login</h2>
+      <form action="common/login.php" method="POST">
+       <input type="hidden" name="student_login" value="1" />
+        <input type="email" name="email" placeholder="Enter email" required />
+        <input type="password" name="password" placeholder="Enter password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div id="mentorForm" class="form-section">
+      <h2>Mentor Login</h2>
+      <form action="common/login.php" method="POST">
+      <input type="hidden" name="mentor_login" value="1" />
+        <input type="email" name="email" placeholder="Enter email" required />
+        <input type="password" name="password" placeholder="Enter password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="common/login/login.js"></script>
+</body>
+</html>
+

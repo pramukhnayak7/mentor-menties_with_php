@@ -1,0 +1,163 @@
+/* Header Section */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #007bff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  }
+  
+  .header .pagetitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* Align the text and checkmark */
+  }
+  
+  .check-icon {
+  width: 20px; /* Adjust the size of the checkmark icon */
+  height: 20px;
+  margin-left: 5px; /* Tight spacing between the text and the icon */
+  }
+  
+  /* Desktop navigation styles */
+  .navbar a {
+  color: #fff;
+  margin: 0 15px;
+  font-size: 18px;
+  display: inline-block; /* Ensure the links are inline in desktop view */
+  }
+  
+  /* Mobile navigation styles */
+  .navbar {
+  display: none; /* Hidden by default on mobile */
+  transition: all 0.3s ease-in-out;
+  }
+  
+  .navbar.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: rgba(0, 123, 255, 0.8); /* Semi-transparent background */
+  padding: 10px 20px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px); /* Apply the blur effect */
+  }
+  
+  #menu-icon {
+  display: block;
+  font-size: 2rem;
+  cursor: pointer;
+  }
+  
+  /* Show navbar on mobile when active */
+  .navbar.active a {
+  padding: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  }
+  
+  /* Desktop-specific styles */
+  @media screen and (min-width: 768px) {
+  .navbar {
+    display: flex !important;
+    flex-direction: row;
+  }
+  
+  .navbar a {
+    color: #fff;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+  
+  #menu-icon {
+    display: none;
+  }
+}
+  
+/* Basic styling for the mentor profile page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .profile-section {
+    max-width: 800px;
+    margin: 120px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;  /* Added margin for spacing */
+  }
+  
+  .profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;  /* Adjusted to start from the left */
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+  }
+  
+  .profile-pic img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ccc; /* Added a border for a more defined image */
+  }
+  
+  #mentor-info {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  #mentor-info th, #mentor-info td {
+    padding: 12px;  /* Increased padding for better readability */
+    text-align: left;
+    font-size: 16px; /* Set font size for better clarity */
+  }
+  
+  #mentor-info th {
+    background-color: #f2f2f2;
+    font-weight: bold; /* Make headings bold */
+  }
+  
+  #mentor-info td {
+    background-color: #fafafa;
+  }
+  
+  @media screen and (max-width: 768px) {
+    /* Responsive styling for smaller screens */
+    .profile-container {
+      flex-direction: column;  /* Stack items vertically */
+      align-items: center;     /* Center the profile picture and info */
+    }
+  
+    .profile-pic img {
+      width: 120px;
+      height: 120px; /* Adjust image size for mobile */
+    }
+  
+    #mentor-info th, #mentor-info td {
+      padding: 8px; /* Less padding for smaller screens */
+      font-size: 14px; /* Smaller font size for better fit */
+    }
+  }
